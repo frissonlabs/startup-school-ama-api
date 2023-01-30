@@ -59,6 +59,16 @@ async def root():
 # Use POST instead of GET to avoid URL length limit of 2048 characters, in case we need to support longer questions in the future
 @app.post("/api/ask")
 async def ask(query: Query):
+	if(query.embedding != "openai" and query.embedding != "cohere"):
+		return {
+			"answer": "Invalid embedding."
+		}
+
+	if(query.question == None or len(query.question) == 0):
+		return {
+			"answer": "Question is empty."
+		}
+
 	if len(query.question) >= int(QUESTION_CHAR_LIMIT):
 		return {
 			"answer": "Question is too long. Please keep it under " + QUESTION_CHAR_LIMIT + " characters."
