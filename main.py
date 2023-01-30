@@ -12,7 +12,7 @@ load_dotenv()
 
 import os
 
-QUESTION_CHAR_LIMIT = os.getenv('QUESTION_CHAR_LIMIT') or 255
+QUESTION_CHAR_LIMIT = os.getenv('QUESTION_CHAR_LIMIT') or "255"
 
 class Query(BaseModel):
 	question: str
@@ -59,7 +59,7 @@ async def root():
 # Use POST instead of GET to avoid URL length limit of 2048 characters, in case we need to support longer questions in the future
 @app.post("/api/ask")
 async def ask(query: Query):
-	if len(query.question) >= QUESTION_CHAR_LIMIT:
+	if len(query.question) >= int(QUESTION_CHAR_LIMIT):
 		return {
 			"answer": "Question is too long. Please keep it under " + QUESTION_CHAR_LIMIT + " characters."
 		}

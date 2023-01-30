@@ -1,5 +1,14 @@
 # Startup School Ask Me Anything Bot - API
 
+Tested with Python 3.9.15
+
+Dependencies:
+
+FastAPI (API framework)
+Pinecone (managed vector database for embeddings)
+OpenAI (for generating embeddings and forming answers given a query and context)
+Cohere (for generating embeddings)
+
 ## Environment Variables
 
 ```
